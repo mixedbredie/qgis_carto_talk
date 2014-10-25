@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=1024, user-scalable=no">
+
+  <title>QGIS cartographic styles</title>
+
+  <!-- Required stylesheet -->
+  <link rel="stylesheet" href="core/deck.core.css">
+
+  <!-- Extension CSS files go here. Remove or add as needed. -->
+  <link rel="stylesheet" media="screen" href="extensions/goto/deck.goto.css">
+  <link rel="stylesheet" media="screen" href="extensions/menu/deck.menu.css">
+  <link rel="stylesheet" media="screen" href="extensions/navigation/deck.navigation.css">
+  <link rel="stylesheet" media="screen" href="extensions/status/deck.status.css">
+  <link rel="stylesheet" media="screen" href="extensions/scale/deck.scale.css">
+
+  <!-- Style theme. More available in /themes/style/ or create your own. -->
+  <link rel="stylesheet" media="screen" href="themes/style/swiss.css">
+
+  <!-- Transition theme. More available in /themes/transition/ or create your own. -->
+  <link rel="stylesheet" media="screen" href="themes/transition/horizontal-slide.css">
+
+  <!-- Basic black and white print styles -->
+  <link rel="stylesheet" media="print" href="core/print.css">
+
+  <!-- Required Modernizr file -->
+  <script src="modernizr.custom.js"></script>
+</head>
+<body>
+  <div class="deck-container">
+
+    <!-- Begin slides. Just make elements with a class of slide. -->
+
+    <section class="slide">
+      <h1>Custom QML</h1>
+    </section>
+
+    <section class="slide">
+      <h1>credit: shoulders, <font color="green">giants</font>, standing, etc.</h1>
+    </section>
+
+    <section class="slide">
+      <h2>Aforesaid giants</h2>
+      <ul>
+	<li>@charley_glynn</li>
+	<li>@chriswesson_uk</li>
+	<li>@PetersonGIS</li>
+	<li>@stevefaeembra</li>
+	<li>@undertheraedar</li>
+	<li>@nordpil</li>
+	<li>@underdarkGIS</li>
+	<li>@dragons8mycat</li>
+	<li>@vtcraghead (http://bit.ly/1wriwSp)</li>
+	<li>Check QGIS flickr group</li>
+	<li>https://www.flickr.com/groups/qgis/pool/</li>
+	<li>Check OS carto design team pages</li>
+	<li>www.ordnancesurvey.co.uk/resources/carto-design/</li>
+      </ul>
+    </section>
+
+    <section class="slide" id="elements-images">
+      <h2>The data</h2>
+      <p>Available under OSMA / PSMA</p>
+      <p>Strategi, Meridian2, VMD, VML, OSMM</p>
+      <img src="img/vml_os_6000.jpg" alt="vectormap local standard style"/>
+    </section>
+
+    <section class="slide">
+      <h2>Ground Zero</h2>
+      <p>github.com/ordnancesurvey</p>
+      <img src="img/os-github.png" alt="ordnance survey github"/>
+    </section>
+
+    <section class="slide">
+      <h1><font color="green">Open</font> SLD and QML</h1>
+    </section>
+
+    <section class="slide">
+      <h2>Backdrop style</h2>
+      <img src="img/vml_os_3000.jpg" />
+    </section>
+
+    <section class="slide">
+      <h2>1:6000</h2>
+      <img src="img/vml_os_6000.jpg" />
+    </section>
+
+    <section class="slide">
+      <h2>1:10000</h2>
+      <img src="img/vml_os_10000.png" />
+    </section>
+
+    <section class="slide">
+      <h1>But no <font color="grey">greyscale</font></h1>
+    </section>
+
+    <section class="slide">
+      <h2>What we want</h2>
+      <img src="img/os_vmd_greyscale_50.png" />
+    </section>
+
+    <section class="slide">
+      <h2>Design Principles</h2>
+      <ul>
+	<li>user requirements</li>
+	<li>display format</li>
+	<li>visual hierarchy</li>
+	<li>simplicity</li>
+	<li>legibility</li>
+	<li>consistency</li>
+	<li>accessibility</li>
+	<li>composition</li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h2>user (my) requirements</h2>
+      <ul>
+	<li>choice - raster or <u>vector</u></li>
+	<li>choice - full colour or <u>backdrop</u></li>
+	<li>choice - <u>smooth transitions</u> or fixed scales</li>
+      </ul>
+      <img src="img/os_mastermap_greyscale_50.png" />
+    </section>
+
+    <section class="slide">
+      <h2>display format</h2>
+      <ul>
+	<li>web mapping base</li>
+	<li>high quality print composer output</li>
+      </ul>
+      <img src="img/vml_bruised_2500.png" alt="vectormap local custom style"/>
+    </section>
+
+    <section class="slide">
+      <h2>visual hierarchy</h2>
+      <ul>
+	<li>colours and contrast</li>
+	<li>feature highlights</li>
+	<li>consistency</li>
+      </ul>
+      <img src="img/vml_bruised_5000.png" alt="vectormap local custom style"/>
+    </section>
+
+    <section class="slide">
+      <h1>So, roll my own...</h1>
+    </section>
+
+    <section class="slide">
+      <h2>How we got there</h2>
+      <ul>
+	<li>Strip out the backdrop colour codes</li>
+	<li>Convert to greyscale RGB</li>
+	<li><b>R x 0.2126 + G x 0.7152 + B x 0.0722 = Y</b></li>
+	<li>The new colour is RGB(Y,Y,Y)</li>
+	<li>Preserves luminosity and visual hierarchy</li>
+	<li>Optionally convert RGB to HEX</li>
+	<li><a href="http://hex.colorrrs.com">hex.colorrrs.com</a></li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h2>Wot we got</h2>
+      <img src="img/os_strategi_greyscale_settlements_50.png" />
+    </section>
+
+    <section class="slide">
+      <h2>Meridian2</h2>
+      <img src="img/os_meridian2_greyscale_50.png" />
+    </section>
+
+    <section class="slide">
+      <h2>VectorMap District</h2>
+      <img src="img/os_vmd_greyscale_50.png" />
+    </section>
+
+    <section class="slide">
+      <h2>VectorMap Local</h2>
+      <img src="img/os_vml_greyscale_50.png" />
+    </section>
+
+    <section class="slide">
+      <h2>MasterMap</h2>
+      <img src="img/os_mastermap_greyscale_light_25.png" />
+    </section>
+
+    <section class="slide">
+      <h2>Free to share</h2>
+      <img src="img/github-mixedbredie.png" />
+      <p><a href="https://github.com/mixedbredie/QGIS-styles">github.com/mixedbredie/QGIS-styles</a></p>
+    </section>
+
+    <section class="slide">
+      <h2>Caveats</h2>
+      <ul>
+	<li>QML work with my data schema</li>
+	<li>Depends on how you load it</li>
+	<li>GoLoader</li>
+	<li>shp2pgsql</li>
+	<li>FME</li>
+	<li>Creates <em>lots</em> of files</li>
+      <ul>
+    </section>
+
+    <section class="slide">
+      <h1>Styles saved into <font color="green">PostGIS</font> database for QGIS</h1>
+    </section>
+
+    <section class="slide">
+      <h1>To do: convert to <font color="green">SLD</font> for Geoserver</h1>
+    </section>
+
+    <section class="slide">
+      <h2>Christmas come early</h2>
+      <img src="img/qgis_colour_tools.png" alt="new QGIS colour tools"/>
+      <br>
+      <p>coming in 2.6 at the end of the week</p>
+      <p><a href="http://changelog.linfiniti.com/qgis/version/2.6.0/">Changelog</a></p>
+    </section>
+
+    <section class="slide">
+      <h2>Thanks!</h2>
+      <img src="img/os_vmd_toner_50.png" alt="VectorMap District in Toner Style"/>
+      <p>@mixedbredie & https://github.com/mixedbredie/QGIS-styles</p>
+    </section>
+
+    <section class="slide">
+      <h1>Enough! Stop here!</h1>
+    </section>
+
+    <section class="slide">
+      <h2>Bespoke vector terrain</h2>
+      <ul>
+	<li>ascii to DEM Tiffs</li>
+	<li>DEM Tiffs to Aspect</li>
+	<li>Reclassify aspect (360/8)</li>
+	<li>Polygonise sectors 2 through 5</li>
+	<li>Generalise and smooth polygons</li>
+	<li>Colour up in greys</li>
+	<li>Create SLD and layer group with contours</li>
+	<li>One terrain base map</li>
+      <ul>
+    </section>
+
+    <section class="slide">
+      <h1>Terrain images</h1>
+    </section>
+
+
+
+    <section class="slide">
+      <h1>Geoserver layer groups</h1>
+    </section>
+
+    <section class="slide">
+      <h1>Terrain basemap</h1>
+    </section>
+
+    <!-- End slides. -->
+
+    <!-- Begin extension snippets. Add or remove as needed. -->
+
+    <!-- deck.navigation snippet -->
+    <div aria-role="navigation">
+      <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+      <a href="#" class="deck-next-link" title="Next">&#8594;</a>
+    </div>
+
+    <!-- deck.status snippet -->
+    <p class="deck-status" aria-role="status">
+      <span class="deck-status-current"></span>
+      /
+      <span class="deck-status-total"></span>
+    </p>
+
+    <!-- deck.goto snippet -->
+    <form action="." method="get" class="goto-form">
+      <label for="goto-slide">Go to slide:</label>
+      <input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+      <datalist id="goto-datalist"></datalist>
+      <input type="submit" value="Go">
+    </form>
+
+    <!-- End extension snippets. -->
+  </div>
+
+<!-- Required JS files. -->
+<script src="jquery.min.js"></script>
+<script src="core/deck.core.js"></script>
+
+<!-- Extension JS files. Add or remove as needed. -->
+<script src="extensions/menu/deck.menu.js"></script>
+<script src="extensions/goto/deck.goto.js"></script>
+<script src="extensions/status/deck.status.js"></script>
+<script src="extensions/navigation/deck.navigation.js"></script>
+<script src="extensions/scale/deck.scale.js"></script>
+
+<!-- Initialize the deck. You can put this in an external file if desired. -->
+<script>
+  $(function() {
+    $.deck('.slide');
+  });
+</script>
+</body>
+</html>
